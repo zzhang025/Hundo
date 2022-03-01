@@ -59,17 +59,82 @@
                 <div class="col-lg-8">
                     <pre class="line-numbers">
                         <code class="language-js">
-                            //Call hello world
-                            function Helloworld(){
-                                alert("hello world");
+                            
+                            // Get the values from the Pgae //
+                            // Starts and controller functino
+                            function getValues(){
+                                //Get values from the page
+                                let startValue = document.getElementById("startValue").value;
+                                let endValue = document.getElementById("endValue").value;
+
+                                //parse into Integers
+                                startValue = parseInt(startValue);
+                                endValue = parseInt(endValue);
+
+                                //Validate Inputs
+                                if (Number.isInteger(startValue) && Number.isInteger(endValue)) {
+                                    let numbers= generateNumbers(startValue,endValue)
+                                } else {
+                                    alert("Inputs must be integers")
+                                }
+                                //We call generateNumber function
+                                let numbers = generateNumbers(startValue,endValue);
+
+                                //Call displayNumbers function
+                                displayNumbers(numbers);
+
+                            }
+
+                            // Generate numbers from the StartValue to EndValue
+                            // Logic functions
+                            function generateNumbers(sValue,eValue){
+
+                                let numbers=[];
+
+                                // get all numbers from Start to End
+                                for(let index= sValue; index <= eValue; index++){
+                                    numbers.push(index);
+                                }
+
+                                return numbers;
+                            }
+
+                            // Display even numebrs bold
+                            // Display function 
+                            function displayNumbers(numbers){
+                                let templateRows ="";
+                                let className="even";
+                                for (let index = 0; index < numbers.length; index++) {
+                                    let number = numbers[index];
+                                    if(number % 2 == 0){
+                                        className="even";
+                                    } else{
+                                        className="odd";
+                                    }
+
+                                    templateRows += `<tr><td>class="${className}">${number}</td></tr>`;
+                                }
+
+                                document.getElementById("results").innerHTML = templateRows
                             }
                         </code>
                     </pre>
                 </div>
-                <div class="col-lg-4">
-                    <p>The code is structured in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "hello world"</p>
+                <div class="col-lg-4 mt-5">
+                    <h5>Function getValues()</h5><br>
+                    <p>This function will receive inputs from the page and initiate variables.
+                    </p><br>
+                    <p class="mt-5 mb-5"><br>
+                        Validate Inputs: Check if the inputs are integers, if not send alert to the interface
+                    </p><br>
+                    <p class="mt-5">Other functions generateNumbers(), displayNumbers() are also called in here.</p><br>
+                    <h5 class="mt-5 mb-5">Function generateNumbers()</h5><br>
+                    <p class="mt-5 mb-5"><br>
+                        Using <em>"for loop"</em> to generate numbers 
+                    </p><br>
+                    <h5>Function displayNumbers()</h5><br>
+                    <p>This function add generated Numbers into a template row and store as string values.</p><br>
+                    <p>It further detects whether the number is even/odd. If the number is even, it would displayed in bold.</p>
                 </div>
             </div>
         </div>
